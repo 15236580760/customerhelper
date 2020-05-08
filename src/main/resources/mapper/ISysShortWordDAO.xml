@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.customer.ISysShortWordDAO">
+    <!--01.根据类型查询快捷语集合-->
+    <select id="findShortWordByTid"  resultType="SysShortWord">
+        select * from sys_short_word
+        WHERE typeid=#{typeid}
+    </select>
+    <!--02.根据关键字检索快捷语-->
+    <select id="findShortWordByWord" resultType="SysShortWord">
+        select * from sys_short_word
+        WHERE typeid=#{typeid} AND
+        shortword like concat('%',#{shortword},'%')
+    </select>
+
+</mapper>
