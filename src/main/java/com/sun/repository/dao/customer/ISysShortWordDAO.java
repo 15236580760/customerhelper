@@ -16,4 +16,18 @@ public interface ISysShortWordDAO {
     public List<SysShortWord> findShortWordByTid(Integer tid);
     //02.快捷语查询
     public List<SysShortWord> findShortWordByWord(SysShortWord info);
+
+    //03、添加一条快捷语数据
+    public int saveShortWord(SysShortWord sysShortWord) throws Exception;
+
+    //04、更新一条快捷语数据
+    public void updateShortWord(SysShortWord sysShortWord) throws Exception;
+
+    //05、删除一条快捷语数据
+    public void deleteShortWord(Integer id) throws Exception;
+
+    //06、根据typeId删除快捷语数据
+    public void deleteShortWordByTypeId(Integer id) throws Exception;
+
+
 }

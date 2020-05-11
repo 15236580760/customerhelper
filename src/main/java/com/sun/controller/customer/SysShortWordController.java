@@ -1,10 +1,11 @@
 package com.sun.controller.customer;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.sun.entity.customer.SysShortWord;
+import com.sun.form.customer.SysShortWordForm;
 import com.sun.service.customer.ISysShortWordService;
 import com.sun.util.ServerResponse;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,6 +36,54 @@ public class SysShortWordController {
         List<SysShortWord> list = shortWordService.findShortWordByWord(word);
         ServerResponse<List<SysShortWord>> result = ServerResponse.createBySuccess(0, list);
         return result;
+    }
+
+    // 03、添加更新一条快捷语数据
+    @PostMapping("/saveShortWord")
+    @ResponseBody
+    public Object saveOnePrivilege(@RequestBody SysShortWordForm sysShortWordForm) throws Exception {
+        try {
+            if (null != sysShortWordForm) {
+                SysShortWord sysShortWord = BeanUtil.toBean(sysShortWordForm, SysShortWord.class);
+                shortWordService.saveShortWord(sysShortWord);
+                return ServerResponse.createBySuccess();
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 06、删除一条快捷语数据
+    @PostMapping("/deleteShortWord")
+    @ResponseBody
+    public Object deleteShortWord(@RequestBody SysShortWordForm sysShortWordForm) throws Exception {
+        try{
+            if(null != sysShortWordForm) {
+                SysShortWord sysShortWord = BeanUtil.toBean(sysShortWordForm, SysShortWord.class);
+                shortWordService.deleteShortWord(sysShortWord.getId());
+                return ServerResponse.createBySuccess();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 07、根据typeId删除一条快捷语数据
+    @PostMapping("/deleteShortWordByTypeId")
+    @ResponseBody
+    public Object deleteShortWordByTypeId(@RequestBody SysShortWordForm sysShortWordForm) throws Exception {
+        try{
+            if(null != sysShortWordForm) {
+                SysShortWord sysShortWord = BeanUtil.toBean(sysShortWordForm, SysShortWord.class);
+                shortWordService.deleteShortWordByTypeId(sysShortWord.getTypeid());
+                return ServerResponse.createBySuccess();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

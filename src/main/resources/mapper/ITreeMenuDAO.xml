@@ -32,7 +32,34 @@
         select * from sys_treemenu
     </select>
 
+    <!--添加树状短语数据-->
+    <insert id="saveOnePrivilege" parameterType="com.sun.entity.customer.TreeMenu"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO `sys_treemenu`(`url`,`name`,`parent`,`icon`) VALUES
+        ( #{url}, #{name}, #{parent}, #{icon})
+    </insert>
 
+    <!--更新树状短语数据-->
+    <update id="updateOnePrivilege" parameterType="com.sun.entity.customer.TreeMenu">
+            UPDATE
+            `sys_treemenu`
+            SET
+            `url`=#{url},
+            `name`=#{name},
+            `parent`=#{parent},
+            `icon`=#{icon}
+            WHERE id=#{id}
+    </update>
+
+    <!--删除树状短语数据-->
+    <delete id="deleteOnePrivilege" parameterType="java.lang.Integer">
+            DELETE FROM `sys_treemenu` WHERE id=#{id}
+    </delete>
+
+    <!--检索快捷语对应树状节点标题-->
+    <select id="getPrivilegeAndShortWord" resultType="ShortWordAndTreeName">
+        SELECT t.id, t.name, s.id AS sid, s.typeid, s.shortword
+        FROM sys_treemenu t LEFT JOIN sys_short_word s ON s.typeid = t.id
+    </select>
 
 
 </mapper>

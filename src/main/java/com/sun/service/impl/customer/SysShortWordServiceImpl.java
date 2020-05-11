@@ -33,4 +33,27 @@ public class SysShortWordServiceImpl implements ISysShortWordService {
         return sysShortWordDAO.findShortWordByWord(word);
     }
 
+    //03、添加或更新一条树状短语数据
+    @Override
+    public int saveShortWord(SysShortWord sysShortWord) throws Exception {
+        // 保存操作
+        if (null == sysShortWord.getId()) {
+            sysShortWordDAO.saveShortWord(sysShortWord);
+        } else { // 更新操作
+            sysShortWordDAO.updateShortWord(sysShortWord);
+        }
+        return sysShortWord.getId();
+    }
+
+    @Override
+    public void deleteShortWord(Integer id) throws Exception {
+        sysShortWordDAO.deleteShortWord(id);
+    }
+
+    @Override
+    public void deleteShortWordByTypeId(Integer id) throws Exception {
+        sysShortWordDAO.deleteShortWordByTypeId(id);
+    }
+
+
 }

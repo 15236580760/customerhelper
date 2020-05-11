@@ -13,4 +13,32 @@
         shortword like concat('%',#{shortword},'%')
     </select>
 
+
+    <!--03、添加快捷语数据-->
+    <insert id="saveShortWord" parameterType="com.sun.entity.customer.SysShortWord"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO `sys_short_word`(`shortword`,`typeid`) VALUES
+        ( #{shortword}, #{typeid})
+    </insert>
+
+    <!--04、更新快捷语数据-->
+    <update id="updateShortWord" parameterType="com.sun.entity.customer.SysShortWord">
+            UPDATE
+            `sys_short_word`
+            SET
+            `shortword`=#{shortword},
+            `typeid`=#{typeid}
+            WHERE id=#{id}
+    </update>
+
+    <!--05、删除快捷语数据-->
+    <delete id="deleteShortWord" parameterType="java.lang.Integer">
+            DELETE FROM `sys_short_word` WHERE id=#{id}
+    </delete>
+
+    <!--06、根据typeId删除快捷语数据-->
+    <delete id="deleteShortWordByTypeId" parameterType="java.lang.Integer">
+            DELETE FROM `sys_short_word` WHERE typeid=#{typeid}
+    </delete>
+
+
 </mapper>

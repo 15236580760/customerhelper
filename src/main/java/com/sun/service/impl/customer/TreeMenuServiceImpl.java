@@ -2,6 +2,7 @@ package com.sun.service.impl.customer;/**
  * Created by Happy on 2018-04-07.
  */
 
+import com.sun.entity.customer.ShortWordAndTreeName;
 import com.sun.entity.customer.TreeMenu;
 import com.sun.repository.dao.customer.ITreeMenuDAO;
 import com.sun.service.customer.ITreeMenuService;
@@ -37,6 +38,26 @@ public class TreeMenuServiceImpl implements ITreeMenuService {
         return privilegeDAO.getAllPrivilege();
     }
 
+    @Override
+    public int saveOnePrivilege(TreeMenu treeMenu) throws Exception {
+        // 保存操作
+        if (null == treeMenu.getId()) {
+            privilegeDAO.saveOnePrivilege(treeMenu);
+        } else { // 更新操作
+            privilegeDAO.updateOnePrivilege(treeMenu);
+        }
+        return treeMenu.getId();
+    }
+
+    @Override
+    public void deleteOnePrivilege(Integer id) throws Exception {
+        privilegeDAO.deleteOnePrivilege(id);
+    }
+
+    @Override
+    public List<ShortWordAndTreeName> getPrivilegeAndShortWord() throws Exception {
+        return privilegeDAO.getPrivilegeAndShortWord();
+    }
 
     public ITreeMenuDAO getPrivilegeDAO() {
         return privilegeDAO;

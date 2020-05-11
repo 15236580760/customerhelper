@@ -15,4 +15,13 @@ public interface ISysShortWordService {
     //02.快捷语查询
     public List<SysShortWord> findShortWordByWord(SysShortWord word);
 
+    //03、添加或更新一条树状短语数据
+    public int saveShortWord(SysShortWord sysShortWord) throws Exception;
+
+    //04、删除一条快捷语数据
+    public void deleteShortWord(Integer id) throws Exception;
+
+    //05、根据typeId删除快捷语数据
+    public void deleteShortWordByTypeId(Integer id) throws Exception;
+
 }

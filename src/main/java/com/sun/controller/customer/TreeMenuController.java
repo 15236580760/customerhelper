@@ -1,13 +1,16 @@
 package com.sun.controller.customer;/**
  * Created by Happy on 2018-04-04.
  */
-
+import cn.hutool.core.bean.BeanUtil;
+import com.sun.entity.customer.ShortWordAndTreeName;
 import com.sun.entity.customer.TreeMenu;
+import com.sun.form.customer.TreeMenuForm;
 import com.sun.service.customer.ITreeMenuService;
+import com.sun.util.ResultVOUtil;
+import com.sun.util.ServerResponse;
+import com.sun.vo.ResultVO;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -43,7 +46,7 @@ public class TreeMenuController {
     //04.返回系统中所有菜单的json格式   @RequestParam(required = false,defaultValue = "1") int rid
     @RequestMapping("/getAllMenusJson")
     @ResponseBody
-    public Object getAllMenusJson() throws Exception {
+    public ResultVO getAllMenusJson() throws Exception {
 
         //新的容器 保存有父子关系的权限
         List<TreeMenu> rootMenus=new ArrayList<TreeMenu>();
@@ -65,10 +68,55 @@ public class TreeMenuController {
                     }
                 }
             }
-            return rootMenus;
+            return ResultVOUtil.success(rootMenus);
+//            return rootMenus;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    // 05、添加更新一条树状快捷语数据
+    @PostMapping("/saveOnePrivilege")
+    @ResponseBody
+    public Object saveOnePrivilege(@RequestBody TreeMenuForm treeMenuForm) throws Exception {
+
+        try {
+            if (null != treeMenuForm) {
+                TreeMenu treeMenu = BeanUtil.toBean(treeMenuForm, TreeMenu.class);
+                treeMenuService.saveOnePrivilege(treeMenu);
+                return ServerResponse.createBySuccess();
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResultVOUtil.error(null);
+    }
+
+    // 06、删除一条树状快捷语数据
+    @PostMapping("/deleteOnePrivilege")
+    @ResponseBody
+    public Object deleteOnePrivilege(@RequestBody TreeMenuForm treeMenuForm) throws Exception {
+        try{
+            if (null != treeMenuForm) {
+                TreeMenu treeMenu = BeanUtil.toBean(treeMenuForm, TreeMenu.class);
+                treeMenuService.deleteOnePrivilege(treeMenu.getId());
+                return ServerResponse.createBySuccess();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 06、检索快捷语对应树状节点标题
+    @RequestMapping("/getPrivilegeAndShortWord")
+    @ResponseBody
+    public ResultVO getPrivilegeAndShortWord() throws Exception {
+        List<ShortWordAndTreeName> list = treeMenuService.getPrivilegeAndShortWord();
+        return ResultVOUtil.success(list);
+    }
+
+
 }
