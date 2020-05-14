@@ -13,7 +13,6 @@ import javax.validation.constraints.NotEmpty;
  */
 @Data
 public class InscriptionForm {
-
     private Integer id;
     @NotEmpty(message = "段位不能为空")
     private String etc;
