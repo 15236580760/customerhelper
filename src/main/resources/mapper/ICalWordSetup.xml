@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.customer.ITreeMenuDAO">
+
+    <resultMap id="CategoryMapper" type="TreeMenu">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="url" property="url"></result>
+        <result column="parent" property="parent"></result>
+        <!--1:N-->
+        <collection property="children" ofType="TreeMenu" column="id" select="getPrivilegesByPid"></collection>
+    </resultMap>
+
+    <!--1.根据pid  获取所有的子分类-->
+    <select id="getPrivilegesByPid" resultMap="CategoryMapper">
+       SELECT * FROM sys_treemenu
+        WHERE parent=#{pid}
+    </select>
+
+    <select id="getTopPrivileges"  resultType="TreeMenu">
+        select * from sys_treemenu
+        WHERE parent=0
+    </select>
+
+    <!--1.获取和用户绑定的权限集合-->
+    <select id="getAllPrivileges"  resultType="TreeMenu">
+        select * from sys_treemenu
+    </select>
+
+    <!--获取系统所有的权限集合-->
+    <select id="getAllPrivilege"  resultType="TreeMenu">
+        select * from sys_treemenu
+    </select>
+
+    <!--添加树状短语数据-->
+    <insert id="saveOnePrivilege" parameterType="com.sun.entity.customer.TreeMenu"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO `sys_treemenu`(`url`,`name`,`parent`,`icon`) VALUES
+        ( #{url}, #{name}, #{parent}, #{icon})
+    </insert>
+
+    <!--更新树状短语数据-->
+    <update id="updateOnePrivilege" parameterType="com.sun.entity.customer.TreeMenu">
+            UPDATE
+            `sys_treemenu`
+            SET
+            `url`=#{url},
+            `name`=#{name},
+            `parent`=#{parent},
+            `icon`=#{icon}
+            WHERE id=#{id}
+    </update>
+
+    <!--删除树状短语数据-->
+    <delete id="deleteOnePrivilege" parameterType="java.lang.Integer">
+            DELETE FROM `sys_treemenu` WHERE id=#{id}
+    </delete>
+
+    <!--检索快捷语对应树状节点标题-->
+    <select id="getPrivilegeAndShortWord" resultType="ShortWordAndTreeName">
+        SELECT t.id, t.name, s.id AS sid, s.typeid, s.shortword
+        FROM sys_treemenu t LEFT JOIN sys_short_word s ON s.typeid = t.id
+    </select>
+
+
+</mapper>
