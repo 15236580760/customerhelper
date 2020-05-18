@@ -6,6 +6,8 @@ import com.sun.entity.customer.CalWordSetup;
 import com.sun.form.customer.CalWordSetupForm;
 import com.sun.service.customer.ICalWordSetupService;
 import com.sun.util.ServerResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/wordSetup")
+@Api(tags = "优惠话术接口")
 public class CalWordSetupController {
 
     // 注入 service
@@ -26,12 +29,14 @@ public class CalWordSetupController {
     // 搜索优惠话术列表
     @GetMapping("/findWordSetup")
     @ResponseBody
+    @ApiOperation("搜索优惠话术列表")
     public Object findWordSetup() {
         List<CalWordSetup> list = calWordSetupService.findWordSetup();
         return ServerResponse.createBySuccess(list);
     }
 
     // 根据套餐类型查询对应优惠话术
+    @ApiOperation("根据套餐类型查询对应优惠话术")
     @RequestMapping("/findWordSetupByPackageName")
     @ResponseBody
     public Object findWordSetupByPackageName(@RequestBody CalWordSetupForm calWordSetupForm) {
@@ -44,6 +49,7 @@ public class CalWordSetupController {
     }
 
     // 03、添加更新一条话术数据
+    @ApiOperation("添加或更新一条话术数据")
     @PostMapping("/saveOneWordSetup")
     @ResponseBody
     public Object saveOneWordSetup(@RequestBody CalWordSetupForm calWordSetupForm) throws Exception {
