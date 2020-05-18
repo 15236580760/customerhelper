@@ -1,5 +1,5 @@
-#server:
-#  port: 30002
+server:
+  port: 30002
 spring:
   application: #项目名
       name: service-helper
