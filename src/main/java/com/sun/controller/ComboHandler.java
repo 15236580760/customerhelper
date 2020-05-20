@@ -4,6 +4,7 @@ import com.sun.exception.CustomerException;
 import com.sun.form.ComboForm;
 import com.sun.service.ComboService;
 import com.sun.util.ResultVOUtil;
+import com.sun.util.ServerResponse;
 import com.sun.vo.ResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -80,6 +81,16 @@ public class ComboHandler {
         }
         comboService.updateList(comboForms);
         return ResultVOUtil.success(null);
+    }
+
+    @PostMapping("/deleteComboById")
+    @ApiOperation("删除单一套餐")
+    public Object deleteComboById(@RequestBody ComboForm comboForm) {
+        if (0 != comboForm.getId()) {
+            comboService.deleteComboById(comboForm.getId());
+            return ServerResponse.createBySuccess();
+        }
+        return null;
     }
 
 }

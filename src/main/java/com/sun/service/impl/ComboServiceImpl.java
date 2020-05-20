@@ -22,11 +22,13 @@ public class ComboServiceImpl implements ComboService {
     @Autowired
     private GloryComboRepsitory gloryComboRepsitory;
 
+    // 查询所有套餐列表
     @Override
     public List<GloryCombo> findAll() {
         return gloryComboRepsitory.findAll();
     }
 
+    // 添加或更新单一套餐
     @Override
     public void saveOrUpdate(ComboForm comboForm) {
         GloryCombo gloryCombo;
@@ -42,11 +44,13 @@ public class ComboServiceImpl implements ComboService {
 
     }
 
+    // 通过id得到单一套餐
     @Override
     public GloryCombo getOne(Integer id) {
         return gloryComboRepsitory.findById(id).get();
     }
 
+    // 更新所有套餐数据
     @Override
     public void updateList(List<ComboForm> comboForms) {
         for(ComboForm comboForm : comboForms){
@@ -57,5 +61,11 @@ public class ComboServiceImpl implements ComboService {
                 gloryComboRepsitory.save(gloryCombo);
             }
         }
+    }
+
+    // 通过id删除单一套餐
+    @Override
+    public void deleteComboById(Integer id) {
+        gloryComboRepsitory.deleteById(id);
     }
 }
