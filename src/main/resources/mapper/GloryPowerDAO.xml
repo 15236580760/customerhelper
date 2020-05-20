@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.customer.GloryPowerDAO">
+    <!--根据两位数值计算价位-->
+    <select id="selectcount" resultType="java.lang.Integer">
+        select count(*)
+        FROM glory_power
+        where power>#{start}
+        and #{end}>power
+    </select>
+
+    <!--通过初始价格查询当前单价 -->
+    <select id="selectmoney" resultType="java.lang.Double">
+        select money
+        from glory_power
+        where power> #{start}
+        limit 1
+    </select>
+
+    <!-- 通过目标值求出当前单价 -->
+    <select id="selectmoneyb" resultType="java.lang.Double">
+    select money
+    from glory_power
+    where power>= #{end}
+    order by power
+    asc
+    limit 1
+    </select>
+
+    <!--通过开始和结束值求中间得价钱-->
+    <select id="selectmoneycount" resultType="java.math.BigDecimal">
+    select sum(money)
+    from glory_power
+    where #{end}>=power and power>#{start}
+    </select>
+
+    <!-- 查出最小值范围得最大值 -->
+    <select id="selectstartpower" resultType="java.lang.Integer">
+        select power
+        from glory_power
+        where power>#{start}
+        order by power
+        asc
+        limit 1;
+    </select>
+
+    <!--查询目标值得最小值-->
+    <select id="selectendpower" resultType="java.lang.Integer">
+        select power
+        from  glory_power
+        where power>#{end}
+        order by power
+        asc
+        limit 1;
+    </select>
+    <select id="selectpowerprice" resultType="java.math.BigDecimal"></select>
+    <select id="selectstartmoney" resultType="java.lang.Double">
+
+    select money
+    from glory_power
+    where power> #{start}
+    order by power
+    asc
+    limit 1
+    </select>
+    <select id="selectendmoney" resultType="java.lang.Double">
+    select money
+    from glory_power
+    where power>= #{end}
+    order by power
+    asc
+    limit 1
+    </select>
+    <select id="selectstartcount" resultType="java.lang.Integer">
+    select power
+    from glory_power
+    where #{start}>=power
+    order by power
+    desc
+    limit 1
+    </select>
+    <select id="selectendcount" resultType="java.lang.Integer">
+    select power
+    from glory_power
+    where power>#{end}
+    order by power
+    asc
+    limit 1
+    </select>
+    <select id="selectfirstendpower" resultType="java.lang.Integer">
+        select power
+        from glory_power
+        where #{end}>=power
+        order by power
+        desc
+        limit 1
+    </select>
+
+</mapper>
