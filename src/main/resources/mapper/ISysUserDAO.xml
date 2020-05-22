@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.customer.ISysUserDAO">
+    <!--01、定义一个登录的方法-->
+    <select id="isLogin" resultType="SysUser">
+        select  openid from sys_token where token=#{token}
+    </select>
+
+
+
+
+</mapper>
