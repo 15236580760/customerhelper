@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.calculator.IDictionaryDAO">
+    <!--01.查询所有字典数据-->
+    <select id="findAll"  resultType="Dictionary">
+        select * from sys_dictionary
+    </select>
+  <!--  &lt;!&ndash;02.根据关键字检索快捷语&ndash;&gt;
+    <select id="findShortWordByWord" resultType="SysShortWord">
+        select * from sys_short_word
+        WHERE typeid=#{typeid} AND
+        shortword like concat('%',#{shortword},'%')
+    </select>
+
+
+    &lt;!&ndash;03、添加快捷语数据&ndash;&gt;
+    <insert id="saveShortWord" parameterType="com.sun.entity.customer.SysShortWord"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO `sys_short_word`(`shortword`,`typeid`) VALUES
+        ( #{shortword}, #{typeid})
+    </insert>
+
+    &lt;!&ndash;04、更新快捷语数据&ndash;&gt;
+    <update id="updateShortWord" parameterType="com.sun.entity.customer.SysShortWord">
+            UPDATE
+            `sys_short_word`
+            SET
+            `shortword`=#{shortword},
+            `typeid`=#{typeid}
+            WHERE id=#{id}
+    </update>
+
+    &lt;!&ndash;05、删除快捷语数据&ndash;&gt;
+    <delete id="deleteShortWord" parameterType="java.lang.Integer">
+            DELETE FROM `sys_short_word` WHERE id=#{id}
+    </delete>
+
+    &lt;!&ndash;06、根据typeId删除快捷语数据&ndash;&gt;
+    <delete id="deleteShortWordByTypeId" parameterType="java.lang.Integer">
+            DELETE FROM `sys_short_word` WHERE typeid=#{typeid}
+    </delete>
+
+-->
+</mapper>

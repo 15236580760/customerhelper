@@ -49,6 +49,14 @@ public class TreeMenuController {
     }
 
     //04.返回系统中所有菜单的json格式   @RequestParam(required = false,defaultValue = "1") int rid
+    @RequestMapping("/getAllMenusJsonNormal")
+    @ResponseBody
+    public ResultVO getAllMenusJsonNormal() throws Exception {
+        List<TreeMenu> list = treeMenuService.getAllPrivilege();
+        return ResultVOUtil.success(list);
+    }
+
+    //04.返回系统中所有菜单的json格式   @RequestParam(required = false,defaultValue = "1") int rid
     @RequestMapping("/getAllMenusJson")
     @ResponseBody
     @ApiOperation("返回系统中所有菜单的json格式")
