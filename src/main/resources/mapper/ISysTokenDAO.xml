@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.token.ISysTokenDAO">
+
+    <!--01.定义一个添加token的方法-->
+    <insert id="addToken" >
+         INSERT INTO `sys_token`(`token`,`openid`) VALUES
+        (#{token}, #{openid})
+    </insert>
+    <!--02.定义一个检查token的方法-->
+    <select id="checkToken" resultType="SysToken">
+        select * from sys_token
+        WHERE token=#{token}
+    </select>
+
+    <!--03、定义一个删除token的方法-->
+    <delete id="delToken">
+        delete from sys_token where token=#{token}
+    </delete>
+
+    <!--04、定义一个获取openid的方法-->
+    <select id="getOpenId" resultType="java.lang.String">
+        select  openid from sys_token where token=#{token}
+    </select>
+
+
+
+
+</mapper>
