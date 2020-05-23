@@ -57,7 +57,9 @@ public class CalWordSetupController {
             if (null != calWordSetupForm) {
                 CalWordSetup calWordSetup = BeanUtil.toBean(calWordSetupForm, CalWordSetup.class);
 
-                System.out.println(calWordSetup.getId()+ calWordSetup.getWord()+calWordSetup.getPrice()+calWordSetup.getPName());
+                System.out.println(calWordSetup.getId()+ calWordSetup.getWord()
+                        +calWordSetup.getPrice()+calWordSetup.getPName()
+                +calWordSetup.getImgSrc() + calWordSetup.getImgAlt());
 
 
                 calWordSetupService.saveWordSetup(calWordSetup);
