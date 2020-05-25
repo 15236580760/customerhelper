@@ -48,20 +48,14 @@ public class CalWordSetupController {
         return null;
     }
 
-    // 03、添加更新一条话术数据
-    @ApiOperation("添加或更新一条话术数据")
+    // 03、添加更新一条优惠话术数据
+    @ApiOperation("添加或更新一条优惠话术数据")
     @PostMapping("/saveOneWordSetup")
     @ResponseBody
     public Object saveOneWordSetup(@RequestBody CalWordSetupForm calWordSetupForm) throws Exception {
         try {
             if (null != calWordSetupForm) {
                 CalWordSetup calWordSetup = BeanUtil.toBean(calWordSetupForm, CalWordSetup.class);
-
-                System.out.println(calWordSetup.getId()+ calWordSetup.getWord()
-                        +calWordSetup.getPrice()+calWordSetup.getPName()
-                +calWordSetup.getImgSrc() + calWordSetup.getImgAlt());
-
-
                 calWordSetupService.saveWordSetup(calWordSetup);
                 return ServerResponse.createBySuccess();
             }
