@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -26,7 +27,6 @@ import javax.persistence.Id;
 public class GloryPower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;//流水账号
     private int power;//战力值
-    private double money;//战力价钱
+    private BigDecimal money;//战力价钱
 }

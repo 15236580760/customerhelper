@@ -9,6 +9,8 @@ import com.sun.service.customer.ITreeMenuService;
 import com.sun.util.ResultVOUtil;
 import com.sun.util.ServerResponse;
 import com.sun.vo.ResultVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,7 @@ import java.util.List;
 @Controller
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/treemenu")
+@Api(tags = "树状图快捷语标题接口")
 public class TreeMenuController {
     //01.注入菜单的Service
     @Resource(name = "treeMenuService")
@@ -30,6 +33,7 @@ public class TreeMenuController {
     //02.根据分类编号，获取该分类的所有子分类集合
     @ResponseBody
     @RequestMapping("/getAllPrivilegesById")
+    @ApiOperation("根据分类编号，获取该分类的所有子类集合")
     public Object getAllPrivilegesById(int pid) throws Exception {
         List<TreeMenu> list = treeMenuService.getPrivilegesByPid(pid);
         return list;
@@ -38,14 +42,24 @@ public class TreeMenuController {
     //03.获取一级菜单的集合
     @ResponseBody
     @RequestMapping("/getAllTopPrivileges")
+    @ApiOperation("获取一级菜单的集合")
     public Object getAllTopPrivileges() throws Exception {
         List<TreeMenu> topPrivileges = treeMenuService.getTopPrivileges();
         return topPrivileges;
     }
 
     //04.返回系统中所有菜单的json格式   @RequestParam(required = false,defaultValue = "1") int rid
+    @RequestMapping("/getAllMenusJsonNormal")
+    @ResponseBody
+    public ResultVO getAllMenusJsonNormal() throws Exception {
+        List<TreeMenu> list = treeMenuService.getAllPrivilege();
+        return ResultVOUtil.success(list);
+    }
+
+    //04.返回系统中所有菜单的json格式   @RequestParam(required = false,defaultValue = "1") int rid
     @RequestMapping("/getAllMenusJson")
     @ResponseBody
+    @ApiOperation("返回系统中所有菜单的json格式")
     public ResultVO getAllMenusJson() throws Exception {
 
         //新的容器 保存有父子关系的权限
@@ -79,6 +93,7 @@ public class TreeMenuController {
     // 05、添加更新一条树状快捷语数据
     @PostMapping("/saveOnePrivilege")
     @ResponseBody
+    @ApiOperation("添加或更新一条树状图快捷语数据")
     public Object saveOnePrivilege(@RequestBody TreeMenuForm treeMenuForm) throws Exception {
 
         try {
@@ -97,6 +112,7 @@ public class TreeMenuController {
     // 06、删除一条树状快捷语数据
     @PostMapping("/deleteOnePrivilege")
     @ResponseBody
+    @ApiOperation("删除一条树状图快捷语数据")
     public Object deleteOnePrivilege(@RequestBody TreeMenuForm treeMenuForm) throws Exception {
         try{
             if (null != treeMenuForm) {
@@ -113,6 +129,7 @@ public class TreeMenuController {
     // 06、检索快捷语对应树状节点标题
     @RequestMapping("/getPrivilegeAndShortWord")
     @ResponseBody
+    @ApiOperation("检索快捷语对应树状节点标题列表")
     public ResultVO getPrivilegeAndShortWord() throws Exception {
         List<ShortWordAndTreeName> list = treeMenuService.getPrivilegeAndShortWord();
         return ResultVOUtil.success(list);

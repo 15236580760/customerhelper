@@ -26,7 +26,6 @@ import javax.persistence.Id;
 public class GloryPowerDiscount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;//流水账号
     private int grade;//买家需要的分值
     private double discount;//折扣价格
 }

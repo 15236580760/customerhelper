@@ -17,5 +17,11 @@ public interface GloryPowerService {
     //查询价格
     BigDecimal selectprice(int start, int end);
 
+
+
+    int selectsmallpower(int start);
+
+    int selectbigpowerone(int start);
+
     //ResultVO selectprice(int start, int end);
 }

@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EtcUtil {
-
+    /*
+    判断两个值是否相同，返回布尔值
+     */
     public static boolean checkIsSame(String cur, String tar) {
 
         if (cur.equals(tar)) {

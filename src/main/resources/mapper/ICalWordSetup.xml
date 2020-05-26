@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.customer.ICalWordSetupDao">
+
+
+    <!--添加优惠话术数据-->
+    <insert id="saveOneWordSetup" parameterType="com.sun.entity.customer.CalWordSetup"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO `cal_word_setup`(`pname`,`word`,`price`) VALUES
+        ( #{pName}, #{word}, #{price})
+    </insert>
+
+    <!--更新优惠话术数据-->
+    <update id="updateOneWordSetup" parameterType="com.sun.entity.customer.CalWordSetup">
+            UPDATE
+            `cal_word_setup`
+            SET
+            `pname`=#{pName},
+            `word`=#{word},
+            `price`=#{price}
+            WHERE id=#{id}
+    </update>
+
+    <!--根据套餐搜索优惠话术-->
+    <select id="findWordSetupByPackageName"  resultType="com.sun.entity.customer.CalWordSetup">
+        select * from cal_word_setup
+        WHERE pname=#{pName}
+    </select>
+
+    <!--搜索优惠话术列表-->
+    <select id="findWordSetup"  resultType="com.sun.entity.customer.CalWordSetup">
+        select * from cal_word_setup
+    </select>
+
+
+</mapper>

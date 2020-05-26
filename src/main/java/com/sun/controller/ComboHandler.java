@@ -26,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/combo")
 @Slf4j
-@Api(tags = "套餐页面相关接口")
+@Api(tags = "套餐页面相关接口  [Mr.Sou]")
 public class ComboHandler {
 
     @Autowired

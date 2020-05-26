@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sun.repository.dao.customer.GloryPowerDAO">
+    <select id="selectendy" resultType="java.lang.Integer">
+        select count(power)
+        from glory_power
+        where #{end}=power;
+    </select>
+    <select id="selectstartp" resultType="java.lang.Integer">
+        select count(power)
+        from glory_power
+        where #{start}=power;
+    </select>
+
+    <select id="selectbigmoney" resultType="java.math.BigDecimal">
+        select money
+        from glory_power
+        where power >= #{end}
+        group by money
+        asc
+        limit 1;
+    </select>
+
+    <!--取得初始值之前的战力值-->
+    <select id="selectstartsmallpower" resultType="java.lang.Integer">
+    select power
+    from glory_power
+    where power &lt;=#{start}
+    order by power
+    desc
+    limit 1;
+    </select>
+    <select id="queryAll" resultType="GloryPower">
+        select power,money
+        from glory_power
+        where power &gt;= #{start} and power &lt;= #{end}
+    </select>
+
+
+    <!--每个区段得单价-->
+    <select id="selectmoneylist" resultType="java.math.BigDecimal">
+        select money
+        from glory_power
+        where power>#{start} and #{end}>=power;
+    </select>
+    <!--每个区段得战力值 前面得战力值 初始值到结束值-->
+    <select id="selectpowerup" resultType="java.lang.Integer">
+        select power
+        from glory_power o
+        where o.power>=(select  g.power
+        from glory_power g
+        where #{start}>=g.power
+        group by g.power
+        desc
+        limit 1) and (select  l.power
+        from glory_power l
+        where #{end}>l.power
+        group by l.power
+        desc
+        limit 1)>=o.power;
+    </select>
+    <!--每个区段的战力值 靠后的 初始值到结束值-->
+    <select id="selectpower" resultType="java.lang.Integer">
+        select power
+        from glory_power
+        where power>#{start} and #{end}>=power;
+    </select>
+
+    <!--最小值-->
+    <select id="selectsmallpower" resultType="java.lang.Integer">
+    select power
+    from glory_power
+    where #{start}>=power
+    order by power
+    asc
+    limit 1;
+    </select>
+
+    <!--最大值-->
+
+    <select id="selectbigpowerone" resultType="java.lang.Integer">
+    select power
+    from glory_power
+    where  power>=#{start}
+    order by power
+    desc
+    limit 1;
+    </select>
+    <select id="selectbigpower" resultType="java.lang.Integer">
+    select power
+    from glory_power
+    where  #{start}>=power
+    order by power
+    desc
+    limit 1;
+    </select>
+    <insert id="creat">
+        insert
+        into glory_power (power,money)
+        VALUE (#{power}, #{money});
+    </insert>
+    <update id="update">
+        update glory_power
+        set  money=#{money}
+        where power=#{power};
+    </update>
+    <delete id="delete">
+        delete
+        from glory_power
+        where power=#{power};
+    </delete>
     <!--根据两位数值计算价位-->
     <select id="selectcount" resultType="java.lang.Integer">
         select count(*)
@@ -13,7 +121,7 @@
     <select id="selectmoney" resultType="java.lang.Double">
         select money
         from glory_power
-        where power> #{start}
+        where power>=#{start}
         limit 1
     </select>
 
@@ -53,7 +161,6 @@
         asc
         limit 1;
     </select>
-    <select id="selectpowerprice" resultType="java.math.BigDecimal"></select>
     <select id="selectstartmoney" resultType="java.lang.Double">
 
     select money
@@ -94,6 +201,17 @@
         order by power
         desc
         limit 1
+    </select>
+
+    <select id="selectpowernum" resultType="java.lang.Integer">
+        select count(power)
+        from glory_power
+        where power =#{power}
+    </select>
+    <select id="selectnum" resultType="java.lang.Integer">
+        select count(power)
+        from glory_power
+        where power =#{power}
     </select>
 
 </mapper>
