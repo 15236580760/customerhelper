@@ -1,8 +1,8 @@
 server:
-  port: 30000
+  port: 30005
 spring:
   application: #项目名
-    name: service-helper
+      name: service-helper
   datasource:
 #     url: jdbc:mysql://rm-k2j9v1h9vm4025w07.mysql.zhangbei.rds.aliyuncs.com:3306/jingcaidailian?relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
 #     url: jdbc:mysql://rm-k2j9v1h9vm4025w07.mysql.zhangbei.rds.aliyuncs.com:3306/jingcaidailian?relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
@@ -13,8 +13,8 @@ spring:
 
     # url: jdbc:mysql://localhost:3306/customer_helper?relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
-    password: root
-    url: jdbc:mysql://localhost:3307/customer_helper?useSSL=false&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&autoReconnect=true&serverTimezone=GMT%2B8
+    password: 123456
+    url: jdbc:mysql://localhost:3306/customer_helper?useSSL=false&characterEncoding=utf-8&useOldAliasMetadataBehavior=true&autoReconnect=true&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
     filters: stat
     maxActive: 20
@@ -50,6 +50,6 @@ logging:
   pattern:
     console: "%d - %msg%n"
   path: /usr/local/JAVA/Tomcat/customer/
-  # path: C:\Users\Administrator.DESKTOP-9ULE43T\Desktop\
+ # path: C:\Users\Administrator.DESKTOP-9ULE43T\Desktop\
   level:
     com.sun.controller: error

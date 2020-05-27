@@ -74,6 +74,7 @@ public class GloryHandler {
             //查询所有的套餐对应
             List<GloryCombo> combos = comboService.findAll();
 
+            //首先判断初始值和目标值是否相同
             boolean flag = EtcUtil.checkIsSame(cur, tar);
             if (flag) {
                 for (GloryCombo combo : combos) {

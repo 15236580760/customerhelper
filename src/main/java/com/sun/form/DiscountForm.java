@@ -1,6 +1,6 @@
 package com.sun.form;
 
-import lombok.Data;
+import  lombok.Data;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
