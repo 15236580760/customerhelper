@@ -27,5 +27,7 @@ public class Speechcraft {
     private Integer id;  //话术编号
     private String name;  //游戏名称
     private String speechcraft;  //话术内容
+    private String imgsrc;
+    private String imgalt;
 
 }

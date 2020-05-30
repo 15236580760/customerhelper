@@ -60,7 +60,7 @@ public class SysShortWordController {
         return null;
     }
 
-    // 06、删除一条快捷语数据
+    // 06、根据id删除一条快捷语数据
     @PostMapping("/deleteShortWord")
     @ResponseBody
     @ApiOperation("删除一条快捷语数据")

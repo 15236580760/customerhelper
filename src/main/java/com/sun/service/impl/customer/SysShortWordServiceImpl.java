@@ -36,7 +36,7 @@ public class SysShortWordServiceImpl implements ISysShortWordService {
     //03、添加或更新一条树状短语数据
     @Override
     public int saveShortWord(SysShortWord sysShortWord) throws Exception {
-        // 保存操作
+        // 添加操作
         if (null == sysShortWord.getId()) {
             sysShortWordDAO.saveShortWord(sysShortWord);
         } else { // 更新操作

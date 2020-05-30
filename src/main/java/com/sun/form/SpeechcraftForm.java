@@ -19,5 +19,7 @@ public class SpeechcraftForm {
     private String name;
     @NotEmpty(message = "话术不能为空.")
     private String speechcraft;
+    private String imgsrc;
+    private String imgalt;
 
 }

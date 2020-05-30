@@ -42,6 +42,8 @@ public class SpeechcraftServiceImpl implements SpeechcraftService {
         }
         speechcraft.setName(speechcraftForm.getName());
         speechcraft.setSpeechcraft(speechcraftForm.getSpeechcraft());
+        speechcraft.setImgsrc(speechcraftForm.getImgsrc());
+        speechcraft.setImgalt(speechcraftForm.getImgalt());
         speechcraftRepository.save(speechcraft);
     }
 
@@ -53,6 +55,8 @@ public class SpeechcraftServiceImpl implements SpeechcraftService {
                 Speechcraft speechcraft = speechcraftRepository.findById(speechcraftForm.getId()).get();
                 speechcraft.setName(speechcraftForm.getName());
                 speechcraft.setSpeechcraft(speechcraftForm.getSpeechcraft());
+                speechcraft.setImgsrc(speechcraftForm.getImgsrc());
+                speechcraft.setImgalt(speechcraftForm.getImgalt());
                 speechcraftRepository.save(speechcraft);
             }
         }

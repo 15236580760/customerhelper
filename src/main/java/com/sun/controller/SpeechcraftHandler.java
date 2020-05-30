@@ -57,7 +57,7 @@ public class SpeechcraftHandler {
         return ResultVOUtil.success(null);
     }
 
-    @PostMapping("/creat")
+    @PostMapping("/create")
     @ApiOperation("新建语术对象")
     @ApiImplicitParam(name = "SpeechcraftForm",dataType = "SpeechcraftForm",value = "页面语术对象")
     public ResultVO creat(@Valid @RequestBody SpeechcraftForm speechcraftForm, BindingResult bindingResult){
