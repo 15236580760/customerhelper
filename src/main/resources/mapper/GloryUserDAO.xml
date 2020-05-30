@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sun.repository.dao.customer.GloryUserDAO">
+    <insert id="adduser">
+    insert
+    into
+    `glory_user`
+    (id, username, phone, pass, email)
+    value
+    (#{id},#{name},#{phone},#{passadd},#{email});
+   </insert>
+    <select id="selectname" resultType="java.lang.Integer">
+        select
+        count(username)
+        from glory_user
+        where #{name}=username;
+    </select>
+    <select id="selectuser" resultType="java.lang.Integer">
+        select
+        count(username)
+        from glory_user
+        where #{userName}=username
+        and #{passMd5}=pass;
+    </select>
+
+</mapper>
