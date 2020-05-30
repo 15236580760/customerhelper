@@ -1,8 +1,8 @@
 package com.sun.entity.customer;
 
 /**
- * @author 微冷的雨
- * @date 2020/5/19 8:47
+ * @author liu
+ * @date 2020/5/30
  */
 public class SysUser {
 
